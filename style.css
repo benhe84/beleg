@@ -1,0 +1,233 @@
+/* ==============================================
+   Grundlagen
+   ============================================== */
+html, body {
+    height: 100%;
+}
+body {
+background-color:#fff;
+font-size:13px;
+font-family: 'Philosopher', Arial, sans-serif;
+line-height:24px;
+color:#000;
+padding:0;
+margin:0;
+}
+
+* {
+padding:0;
+margin:0;
+outline:none;
+}
+
+a { color:#73ce41;}
+
+a:hover {
+	color: #09CDFB;
+	text-decoration:none;}
+
+img {border:none;}
+
+table {
+	margin: 10px auto;
+	padding: 10px;
+	border: 1px solid #0098BC;
+	border-radius: 5px;
+}
+th, td {padding: 10px;}
+tr {height: 3em;}
+th {
+  width: 15em;
+  background-color: #0098BC;
+  color: #fff;}
+  
+td {height: 2em;
+	background-color: rgba(0,0,0,0.14);
+	text-align: center;
+}
+tr:nth-child(2n+1) {background-color: rgba(0,0,0,0.07)}
+
+/* ==============================================
+   Formularelemente
+   ============================================== */
+form {
+  padding: 20px;
+}
+input[type="text"],input[type="password"],input[type="e-mail"] {
+	margin: 5px;
+	padding: 2px 16px; 
+	height: 25px; 
+	font-size: 1em;
+	border-radius: 8px;
+	/*keine blaue Umrandung beim Fokus*/
+	outline-style: none;
+}
+optgroup {
+   background: #333;
+   color: #FFF;
+}
+
+select {
+	background: #fff; 
+	margin: 5px;
+	padding: 2px 16px; 
+	height: 25px; 
+	font-size: 1em;
+	border-radius: 8px;
+ }
+input[type=submit] {
+    background-color: #0098BC;
+    color: white;
+	font-size: 1.2em;
+    margin: 5px;
+	padding: 10px 16px; 
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #09CDFB;
+}
+
+
+
+
+/* ==============================================
+   �berschriften
+   ============================================== */
+h1{
+	font-size:20px;
+	margin:10px 0;
+	padding:0 0 5px 0;
+	border-bottom:1px dotted #cacaca;
+	color:#000;}
+
+h2{
+	font-size:16px;
+	margin:10px 0;
+	color:#000;}
+
+h3{
+	font-size:13px;
+	margin:10px 0;
+	color:#73ce41;}
+
+#logo  {
+	float:left;
+	font-size:28px;
+	font-weight:bold;
+	color:#fff;
+	text-decoration:none;
+	padding:20px;}
+
+#logo:hover {color:#3F4444;}
+
+/* ==============================================
+   Hauptnavigation
+   ============================================== */
+.topnav {
+	background-color:#0098BC;
+	height:60px;
+	padding:0;
+	margin:0;
+	border-bottom:5px solid #09CDFB;}
+
+.topnav ul {
+	margin:0;
+	padding:0;
+	list-style:none;}
+
+.topnav ul li {
+	width: 100px;
+	float:left;}
+
+.topnav ul li a {
+	font-family: Arial, sans-serif;
+	display:block;
+	height:38px;
+	padding:22px 22px 0;
+	color:#fff;
+	text-decoration:none;
+	background-color:#0098BC;}
+
+.topnav ul li a:hover {background-color:#09CDFB;color:#3F4444;}
+
+/* ==============================================
+   Untermen�s
+   ============================================== */
+.topnav li li {
+	font-size: .8em;
+	clear: left;
+}
+.topnav li ul {
+	position: absolute;
+	display: none;
+	width: inherit;}
+
+.topnav li:hover ul {display: block;}
+
+.topnav li ul li {display: block;}
+
+/* ==============================================
+   Wrapper
+   ============================================== */
+.wrap {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    
+}
+/* ==============================================
+   Hauptinhalt
+   ============================================== */
+.content {
+	font-family: Arial, sans-serif;
+	background-color:#fff;
+	width:auto;
+	height:auto;
+	padding:30px 60px;
+	margin:20px auto }
+
+/* ==============================================
+   Seitenfooter
+   ============================================== */
+.footer {
+	position:absolute;
+    bottom: 0;
+    width: 100%;
+	font-family: Arial, sans-serif;
+	background-color:#072231;
+	border-bottom:5px solid #03121b;
+	color:#fff;
+	font-size:11px;
+	height:30px;
+	margin: 0 auto;
+	}
+/* ==============================================
+   Hinweistext
+   ============================================== */
+.hint {
+	float:right;
+	width: 20%;
+	font-size: 110%;
+	background-color: #fff9df;
+	padding: 0 0 0 35;
+	border-top: 3px solid #f3c600;
+	border-bottom: 3px solid #f3c600;
+	margin: 0 10 10;
+}
+/* ==============================================
+   Hinweisboxen auf Seiten
+   ============================================== */
+.page_hint {
+	float:right;
+	width: 20%;
+	font-size: 90%;
+	background-color: #fff9df;
+	padding: 0 10px;
+	border-top: 3px solid #f3c600;
+	border-bottom: 3px solid #f3c600;
+	margin: 0 10 10;
+}
