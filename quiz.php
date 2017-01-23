@@ -1,11 +1,14 @@
 <?php
 // Sorgt dafür das beim neuladen die nächste Frage gezeigt wird
+/**
+ *
+ */
 function next_question(){
 	global $solved,$db,$qnr,$awresult,$points;
 	// Speichert Ergebnis in Datenbankaufruf
 	if (!$solved) {
-		$sql = ("INSERT INTO `bhe_quiz_gefragt`(`sid`, `fnr`, `try`, `solved`,`points`) VALUES (".$_SESSION['SID'].",".$qnr.",".$_SESSION['Versuch'].",".(int) $awresult.",".$points.")");
-		$result=$db->query($sql);}
+        $sql = ("INSERT INTO `bhe_quiz_gefragt`(`sid`, `fnr`, `try`, `solved`,`points`) VALUES (".$_SESSION['SID'].",".$qnr.",".$_SESSION['Versuch'].",".(int) $awresult.",".$points.")");
+		$db->query($sql);}
 	// Nächste Frage
 	$_SESSION['quest']++;
 	$_SESSION['Versuch']=0;
@@ -30,7 +33,7 @@ function auswertung(){
 	$st = ("SELECT * FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
 	$erg=$db->query($st);
 	$reachable = (($erg->rowCount())*5);
-	echo '<h2>Du hast '.$points.' , von '.$reachable.' m&ouml;glichen Punkten erreicht!</h2>';
+	echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>';
 	}
 include ('header.php');
 if ($_SESSION['Login']==1){
@@ -71,7 +74,7 @@ if ($_SESSION['Login']==1){
 					for ($i=1;$i<=6;$i++){
 						if($_POST['frantwort']==$erg['aw0'.$i]){
 							$awresult=true;
-							$points=5;
+							$points=floor(5/$_SESSION['Versuch']);
 							break;}
 					}
 				}
@@ -93,7 +96,7 @@ if ($_SESSION['Login']==1){
 			if ($erg['fragetyp']==1){
 				//Auswertung
 				if ($try>=1){
-					if($_POST['dropdown']==$erg['aw01']){$awresult=true;$points=5;}
+					if($_POST['dropdown']==$erg['aw01']){$awresult=true;$points=floor(5/$_SESSION['Versuch']);}
 				}
 				//Zufällige Anordnung der Antworten im 1. Versuch
 				if ($try==0){choice_shuffle();}
@@ -134,7 +137,7 @@ if ($_SESSION['Login']==1){
 					if(($fixed==$correct)&&($fixed==$opted)){
 						$awresult=true;
 					}
-					$points=round(5/$opted*$correct);
+					$points=floor(5/$opted*$correct);
 				}
 				//Zufällige Anordnung der Antworten im 1. Versuch
 				if ($try==0){choice_shuffle();}
@@ -157,6 +160,7 @@ if ($_SESSION['Login']==1){
 			if (($awresult)||($try==2)) {
 				next_question();
 				if ($awresult) echo '<h3>Die Antwort war Richtig</h3>';
+				echo '<h2>Du hast '.$points.' von 5 Punkten erreicht';
 				echo '<br/><br/><p><a href="quiz.php">N&auml;chste Frage</a>';
 			}
 		}

@@ -1,13 +1,13 @@
 <?php
 include ('header.php');
 if ($_SESSION['Admin']==1){
-	if (isset($_GET['senden'])){
-		$pupil = $_GET['pupil'];
+	if (isset($_POST['senden'])){
+		$pupil = $_POST['pupil'];
 	}
 	else $pupil ="reset";
 	echo '<div class="page_hint">';
 	echo '<h2>Sch&uuml;lerauswahl</h2>';
-	echo '<Form action="answers_show.php" method="get">';
+	echo '<Form action="answers_show.php" method="post">';
 	$sql = "SELECT `Name`, `Vorname`, `sid` FROM `".$pre."user`";
 	if ($result=$db->query($sql)){
 		$ds = $result->rowCount();
@@ -15,11 +15,11 @@ if ($_SESSION['Admin']==1){
 		echo '<select name="pupil">';
 		foreach ($result as $spinner){
 			echo '<option value="'.$spinner[2].'"';
-			if (isset($_GET["senden"])) if ($_GET['pupil']==$spinner[2]) echo ' selected';
+			if (isset($_POST["senden"])) if ($_POST['pupil']==$spinner[2]) echo ' selected';
 			echo '>'.$spinner[0].', '.$spinner[1].'</option>';
 		}
 		echo '<option value="reset"';
-		if (isset($_GET["senden"])) if ($_GET['pupil']=='reset') echo ' selected';
+		if (isset($_POST["senden"])) if ($_POST['pupil']=='reset') echo ' selected';
 		echo '>Zur&uuml;cksetzen</option>';
 		echo '</select><br />';
 		}
@@ -28,9 +28,9 @@ if ($_SESSION['Admin']==1){
 	echo '</form>';
 	echo '</div>';
 	$db = new PDO($dsn, $user, $pwd);
-	if ($pupil=="reset") $st = $db->prepare("SELECT Vorname, Name, frage as 'Frage', try as 'Versuche', solved as '', `points` as 'Punkte' FROM ".$pre."user LEFT JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid ORDER BY Name");
-	else $st = $db->prepare("SELECT Vorname, Name, frage as 'Frage', try as 'Versuche', solved as '', `points` as 'Punkte' FROM ".$pre."user LEFT JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid WHERE ".$pre."user.sid = ".$pupil." ORDER BY Name"); 
-	if ($st->execute()){
+	if ($pupil=="reset") $st = $db->prepare("SELECT `Vorname`, `Name`, `frage` as 'Frage', `try` as 'Versuche', `solved` as '', `points` as 'Punkte' FROM ".$pre."user INNER JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid ORDER BY `frage`");
+	else $st = $db->prepare("SELECT Vorname, Name, frage as 'Frage', try as 'Versuche', solved as '', `points` as 'Punkte' FROM ".$pre."user INNER JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid WHERE ".$pre."user.sid = :pupil ORDER BY `frage`");
+    if ($st->execute(array(':pupil'=>$pupil))){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
 		if ($rows>0){

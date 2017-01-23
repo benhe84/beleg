@@ -1,36 +1,31 @@
 <?php
 include ('header.php');
 if ($_SESSION['Admin']==1){
-	if (isset($_GET['senden'])){
-		$EFName = $_GET['FName'];
-		$EVName = $_GET['VName'];
-		$EKlasse = $_GET['Klasse'];
+	if (isset($_POST['senden'])){
+        $fname = $_POST['FName']."%";
+		$vname = $_POST['VName']."%";
+		$klasse = $_POST['Klasse']."%";
 	}
+    else {
+        $fname = "%";
+        $vname = "%";
+        $klasse = "%";
+    }
 	echo '<div class="page_hint">';
 	echo '<h2>Sch&uuml;lersuche</h2>';
-	echo '<Form action="student_search.php" method="get">';
+	echo '<Form action="student_show.php" method="post">';
 	echo '<input type="Text" placeholder="Name" name="FName"';
-	if (isset($_GET["senden"])) echo ' Value='.($_GET['FName']);
+	if (isset($_POST["senden"])) echo ' Value='.($_POST['FName']);
 	echo ' />';
 	echo '<input type="Text" placeholder="Vorname" name="VName"';
-	if (isset($_GET["senden"])) echo ' Value='.($_GET['VName']);
+	if (isset($_POST["senden"])) echo ' Value='.($_POST['VName']);
 	echo ' />';
 	echo '<input type="Text" placeholder="Klasse" name="Klasse"';
-	if (isset($_GET["senden"])) echo ' Value='.($_GET['Klasse']);
+	if (isset($_POST["senden"])) echo ' Value='.($_POST['Klasse']);
 	echo ' />';
 	echo '<input type="Submit" value="Suchen" name="senden" />';
 	echo '</form>';
 	echo '</div>';
-	if (isset($_GET['senden'])){
-		$fname = $EFName."%";
-		$vname = $EVName."%";
-		$klasse = $EKlasse."%";
-	}
-	else {
-		$fname = "%";
-		$vname = "%";
-		$klasse = "%";
-	}
 	$db = new PDO($dsn, $user, $pwd);
 	$st = $db->prepare("SELECT `sid`, `e-mail` as `E-Mail`, `Vorname`, `Name`, `Klasse`, `lehrer` as `Rolle`  FROM `".$pre."user` WHERE `Name` LIKE :fname && `Vorname` LIKE :vname && `Klasse` LIKE :klasse");
 	if ($st->execute(array(':fname' => $fname, ':vname'=> $vname, ':klasse'=>$klasse))){
