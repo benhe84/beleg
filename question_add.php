@@ -27,6 +27,7 @@ if ($_SESSION['Admin']==1){
     }
     else{
 ?>
+<----
 <form action="question_add.php" method="post">
     <table>
         <tr><td><textarea name="Frage" placeholder="Hier die Frage eingeben" cols="35" rows="4"></textarea></td></tr>

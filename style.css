@@ -5,19 +5,19 @@ html, body {
     height: 100%;
 }
 body {
-background-color:#fff;
-font-size:13px;
-font-family: 'Philosopher', Arial, sans-serif;
-line-height:24px;
-color:#000;
-padding:0;
-margin:0;
+    background-color:#fff;
+    font-size:13px;
+    font-family: 'Philosopher', Arial, sans-serif;
+    line-height:24px;
+    color:#000;
+    padding:0;
+    margin:0;
 }
 
 * {
-padding:0;
-margin:0;
-outline:none;
+    padding:0;
+    margin:0;
+    outline:none;
 }
 
 a { color:#73ce41;}
@@ -185,7 +185,7 @@ h3{
 .content {
 	font-family: Arial, sans-serif;
 	background-color:#fff;
-	width:auto;
+	width: auto;
 	height:auto;
 	padding:30px 60px;
 	margin:20px auto }
@@ -213,10 +213,10 @@ h3{
 	width: 20%;
 	font-size: 110%;
 	background-color: #fff9df;
-	padding: 0 0 0 35;
+	padding: 0px 0px 0px 35px;
 	border-top: 3px solid #f3c600;
 	border-bottom: 3px solid #f3c600;
-	margin: 0 10 10;
+	margin: 0px 10px 10px;
 }
 /* ==============================================
    Hinweisboxen auf Seiten
@@ -229,5 +229,14 @@ h3{
 	padding: 0 10px;
 	border-top: 3px solid #f3c600;
 	border-bottom: 3px solid #f3c600;
-	margin: 0 10 10;
+	margin: 0px 10px 10px;
 }
+/* ==============================================
+   Wissensvermittlung
+   ============================================== */
+.knowledge {width: 600px; }
+.sub-nav-container {height: 45px; padding: 6px 10px; text-align: center;}
+.sub-nav-container>div {display: inline-block;}
+.sub-nav-left {float: left;}
+.sub-nav-right {float: right;}
+
