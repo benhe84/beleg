@@ -237,9 +237,24 @@ h3{
 /* ==============================================
    Wissensvermittlung
    ============================================== */
-.knowledge {width: 600px; }
+.knowledge {width: 800px; }
+.knowledge ul{
+	list-style-position:inside;
+	list-style-type: square;
+	padding: 20px;
+}
+.knowledge table
 .sub-nav-container {height: 45px; padding: 6px 10px; text-align: center;margin-bottom: 50px;}
 .sub-nav-container>div {display: inline-block;}
 .sub-nav-left {float: left;}
 .sub-nav-right {float: right;}
-
+/* ==============================================
+   Darstellung von Quellcode
+   ============================================== */
+pre {
+	background: #f4f4f4;
+	font: 13px "Courier 10 Pitch", Courier, monospace;
+	line-height: 1.5;
+	margin-bottom: 1.625em;
+	padding: 0.75em 1.625em;
+}

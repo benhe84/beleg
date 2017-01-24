@@ -25,19 +25,19 @@ function choice_shuffle(){
 }
 // Wertet die Gesamtpunkzahl aus
 function auswertung(){
-	global $db, $pre;
-	$st = $db->prepare("SELECT SUM(`points`) as 'Punkte' FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
-	$st->execute();
-	$erg = $st->fetch();
-	$points = $erg[0];                                                                                                  // Erreichte Punkte
-	$st = ("SELECT * FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
-	$erg=$db->query($st);
-	$reachable = (($erg->rowCount())*5);
-	echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>';
-	}
+    global $db, $pre;
+    $st = $db->prepare("SELECT SUM(`points`) as 'Punkte' FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
+    $st->execute();
+    $erg = $st->fetch();
+    $points = $erg[0];                                                                                                  // Erreichte Punkte
+    $st = ("SELECT * FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
+    $erg=$db->query($st);
+    $reachable = (($erg->rowCount())*5);
+    echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>';
+}
 include ('header.php');
-if ($_SESSION['Login']==1){
-	if(isset($_POST['menu'])){$_SESSION['quest']=1;$_SESSION['Versuch']=0;} 
+if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Admin']==1)){
+    if(isset($_POST['menu'])){$_SESSION['quest']=1;$_SESSION['Versuch']=0;}
     // Einlesen der Frage
 	if(isset($_SESSION['quest'])){$quest=$_SESSION['quest'];}
 	else $_SESSION['quest']=1;

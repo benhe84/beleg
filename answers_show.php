@@ -20,7 +20,7 @@ if ($_SESSION['Admin']==1){
 		}
 		echo '<option value="reset"';
 		if (isset($_POST["senden"])) if ($_POST['pupil']=='reset') echo ' selected';
-		echo '>Zur&uuml;cksetzen</option>';
+		echo '>Alle Sch&uuml;ler anzeigen</option>';
 		echo '</select><br />';
 		}
 	}

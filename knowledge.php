@@ -20,7 +20,7 @@ if ($_SESSION['Login']==1)
             // Zugang zum Wissenstest
             echo '<h1>Weiter zum Wissenstest</h1>';
             echo '<p>Sie haben alle Seiten angesehen und k&ouml;nnen nun den Wissenstest starten</p>';
-            echo '<form action="quiz.php"><input type="hidden" name="knowledge" value="1" /><input type="submit" value="weiter zum Quiz" /></form>';
+            echo '<form action="quiz.php" method="post"><input type="hidden" name="knowledge" value="1" /><input type="submit" value="weiter zum Quiz" /></form>';
         }
     }
     echo '</div>';
