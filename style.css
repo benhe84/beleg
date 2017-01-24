@@ -235,7 +235,7 @@ h3{
    Wissensvermittlung
    ============================================== */
 .knowledge {width: 600px; }
-.sub-nav-container {height: 45px; padding: 6px 10px; text-align: center;}
+.sub-nav-container {height: 45px; padding: 6px 10px; text-align: center;margin-bottom: 50px;}
 .sub-nav-container>div {display: inline-block;}
 .sub-nav-left {float: left;}
 .sub-nav-right {float: right;}

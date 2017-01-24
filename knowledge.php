@@ -7,12 +7,12 @@ if ($_SESSION['Login']==1)
     // Lädt die Seite aus der Datenbank
     $st = $db->prepare("SELECT * FROM `".$pre."knowledge` ORDER BY `id` LIMIT ".$page.",1");
     if ($st->execute()){
-        echo '<div class="sub-nav-container">';
         $row=$st->rowCount();
         if ($row==1){
             $knowledge = $st->fetch();
             echo '<h1>' . $knowledge['title'] . '</h1>';
             echo $knowledge['content'];
+            echo '<div class="sub-nav-container">';
             if ($page >= 1) echo '<div class="sub-nav-left"><form action="knowledge.php" method="post"><input type="hidden" name="page" value='.($page - 1).' /><input type="submit" value="letzte Seite" /></form></div>';
             echo '<div class="sub-nav-right"><form action="knowledge.php" method="post"><input type="hidden" name="page" value='.($page+1).' /><input type="submit" value="n&auml;chste Seite" /></form></div></div>';
         }
