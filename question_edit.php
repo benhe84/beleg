@@ -57,7 +57,7 @@ if ($_SESSION['Admin']==1){
 							echo '</select>';       
 							break;
 						default:
-							echo '<td><input type="Text" name="'.$meta['name'].'" Value='.($erg[$meta['name']]).' />';
+							echo '<td><input type="Text" name="'.$meta['name'].'" Value="'.($erg[$meta['name']]).'" />';
 							echo '</td></tr>';
 					}
 				}

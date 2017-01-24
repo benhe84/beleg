@@ -2,7 +2,7 @@
 include ('header.php');
 if ($_SESSION['Login']==1)
 {   if(isset($_POST['page']))$page=$_POST['page'];
-    else $page=1;
+    else $page=0;
     echo '<div class="knowledge">';
     // Lädt die Seite aus der Datenbank
     $st = $db->prepare("SELECT * FROM `".$pre."knowledge` ORDER BY `id` LIMIT ".$page.",1");
