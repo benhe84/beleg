@@ -1,0 +1,5 @@
+UPDATE quizcards.bhe_quiz_fragen SET frage = 'Was löst der PHP-Befehl $a++ aus?', fragetyp = 0, aw01 = 'a wird um eins erhöht', aw02 = 'a wird um 1 erhöht', aw03 = '$a=$a+1', aw04 = '', aw05 = '', aw06 = '', hint = 'Es handelt sich dabei um eine Abgekürzte Operation' WHERE fnr = 1;
+UPDATE quizcards.bhe_quiz_fragen SET frage = 'Freie', fragetyp = 1, aw01 = 'Richtig', aw02 = 'richtig', aw03 = null, aw04 = null, aw05 = null, aw06 = null, hint = 'Hinweis' WHERE fnr = 2;
+UPDATE quizcards.bhe_quiz_fragen SET frage = 'Dropdown', fragetyp = 1, aw01 = 'Richtig', aw02 = 'Falsch2', aw03 = 'Falsch3', aw04 = 'Falsch4', aw05 = 'Falsch5', aw06 = 'Falsch6', hint = 'Hinweis' WHERE fnr = 3;
+UPDATE quizcards.bhe_quiz_fragen SET frage = 'Testfrage', fragetyp = 1, aw01 = 'es', aw02 = '', aw03 = '', aw04 = '', aw05 = '', aw06 = '', hint = '' WHERE fnr = 5;
+UPDATE quizcards.bhe_quiz_fragen SET frage = 'Wie ist die Frage', fragetyp = 0, aw01 = 'Neu', aw02 = '', aw03 = '', aw04 = '', aw05 = '', aw06 = '', hint = '' WHERE fnr = 6;
