@@ -65,7 +65,6 @@ if ($_SESSION['Login']==1){
 		}
 		if (($question->rowCount())==1){
 			echo '<h1>'.$erg['frage'].'</h1>';
-			if ($solved) echo '<h2>Die Frage wurde bereits beantwortet. Dieser Versuch wird nicht gewertet!</h2>';
 			echo '<form action="quiz.php" method="post">';
 			// Freitexteingabefragen
 			if ($erg['fragetyp']==0){
@@ -157,6 +156,7 @@ if ($_SESSION['Login']==1){
 			}
 			if ((!$awresult)&&(!($try==2))) echo '<br/><p><input type="submit" value="Pr&uuml;fe die Antwort" name="answer'.$try.'" /></p>';
 			echo '</form>';
+            if ($solved) echo '<h2>Die Frage wurde bereits beantwortet. Dieser Versuch wird nicht gewertet!</h2>';
 			if (($awresult)||($try==2)) {
 				next_question();
 				if ($awresult) echo '<h3>Die Antwort war Richtig</h3>';
