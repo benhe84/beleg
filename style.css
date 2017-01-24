@@ -243,7 +243,25 @@ h3{
 	list-style-type: square;
 	padding: 20px;
 }
-.knowledge table
+.knowledge table {
+	margin: 0 0 15px;
+	width: 100%;
+	border-collapse: collapse;
+    border: hidden;
+}
+.knowledge th {
+    font-weight: bold;
+    border: 1px solid #CCC;
+    padding: 5px 10px;
+    background: #0098BC;
+    }
+.knowledge td{
+	border: 1px solid #CCC;
+	padding: 5px 10px;
+    background: #FFFFFF;
+}
+.knowledge tr:nth-child(even){background-color: #f2f2f2}
+
 .sub-nav-container {height: 45px; padding: 6px 10px; text-align: center;margin-bottom: 50px;}
 .sub-nav-container>div {display: inline-block;}
 .sub-nav-left {float: left;}
@@ -252,9 +270,14 @@ h3{
    Darstellung von Quellcode
    ============================================== */
 pre {
-	background: #f4f4f4;
-	font: 13px "Courier 10 Pitch", Courier, monospace;
-	line-height: 1.5;
-	margin-bottom: 1.625em;
-	padding: 0.75em 1.625em;
+    position:relative;
+    padding: 0em .8em;
+    border-left: #b4c6e0 6px solid;
+    display: block;
+    overflow: auto;
+    font-family: monospace;
+
+    line-height: 1.5em;
+    background: #eeeeee;
+    margin-bottom:1em;
 }

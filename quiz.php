@@ -35,7 +35,8 @@ function auswertung(){
     $reachable = (($erg->rowCount())*5);
     echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>';
 }
-include ('header.php');
+
+include('header.php');
 if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Admin']==1)){
     if(isset($_POST['menu'])){$_SESSION['quest']=1;$_SESSION['Versuch']=0;}
     // Einlesen der Frage
@@ -71,7 +72,7 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 				//Auswertung
 				if ($try>=1 ){
 					for ($i=1;$i<=6;$i++){
-						if($_POST['frantwort']==$erg['aw0'.$i]){
+						if(htmlentities(($_POST['frantwort']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw0'.$i]){
 							$awresult=true;
 							$points=floor(5/$_SESSION['Versuch']);
 							break;}
@@ -95,7 +96,7 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 			if ($erg['fragetyp']==1){
 				//Auswertung
 				if ($try>=1){
-					if($_POST['dropdown']==$erg['aw01']){$awresult=true;$points=floor(5/$_SESSION['Versuch']);}
+					if(htmlentities(($_POST['dropdown']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw01']){$awresult=true;$points=floor(5/$_SESSION['Versuch']);}
 				}
 				//Zufällige Anordnung der Antworten im 1. Versuch
 				if ($try==0){choice_shuffle();}
@@ -129,7 +130,7 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 					$opted=$erg['fragetyp'];	//Anzahl der richtigen Boxen
 					for ($i=1;$i<=$opted;$i++){
 						for($j=1;$j<=6;$j++){
-							if(isset($_POST[$j])){if($_POST[$j]==$erg['aw0'.$i]){$correct++;}}
+							if(isset($_POST[$j])){if(htmlentities(($_POST[$j]), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw0'.$i]){$correct++;}}
 						}
 					}
 					for($j=1;$j<=6;$j++){if(isset($_POST[$j])){$fixed++;}}

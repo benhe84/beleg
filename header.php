@@ -7,12 +7,12 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="robots" content="index, follow" />
-	<title>Quizcards</title>
+	<title>PHPquiz</title>
 	<link type="text/css" href="style.css" rel="stylesheet" media="screen" /> 
 </head>
 <body>
 <div class="wrap">
-<a href="index.php" id="logo">Quizcard</a>
+<a href="index.php" id="logo">PHPquiz</a>
 <div class="topnav">
 <?php
 session_start();

@@ -7,15 +7,15 @@ if ($_SESSION['Admin']==1){
 	echo '</div>';
 	if (isset($_POST['save'])){
 		$FNR = $_POST['fnr'];
-		$Frage = $_POST['Frage'];
-		$Fragetyp = $_POST['Fragetyp'];
-		$AW1 = $_POST['Antwort_1'];
-		$AW2 = $_POST['Antwort_2'];
-		$AW3 = $_POST['Antwort_3'];
-		$AW4 = $_POST['Antwort_4'];
-		$AW5 = $_POST['Antwort_5'];
-		$AW6 = $_POST['Antwort_6'];
-		$Hinweis = $_POST['Hinweis'];
+		$Frage = htmlentities(($_POST['Frage']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $Fragetyp = htmlentities(($_POST['Fragetyp']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $AW1 = htmlentities(($_POST['Antwort_1']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $AW2 = htmlentities(($_POST['Antwort_2']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $AW3 = htmlentities(($_POST['Antwort_3']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $AW4 = htmlentities(($_POST['Antwort_4']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $AW5 = htmlentities(($_POST['Antwort_5']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $AW6 = htmlentities(($_POST['Antwort_6']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
+        $Hinweis = htmlentities(($_POST['Hinweis']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
 		// Create connection
 		$db = new PDO($dsn, $user, $pwd);
 		$st = $db->prepare("UPDATE `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint  WHERE `fnr` = '".$FNR."'");
