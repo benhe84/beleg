@@ -12,7 +12,7 @@ if ($_SESSION['Admin']==1){
 		$db = new PDO($dsn, $user, $pwd);
 		$st = $db->prepare("UPDATE `".$pre."user` SET `Vorname`=:vname,`Name`= :name,`e-mail`=:mail,`Klasse`= :klasse,`lehrer`= :lehrer WHERE `sid` = ".$SID);
 		if ($st->execute(array(':mail' => $EMail, ':vname'=> $Vorname, ':name' => $Name,':klasse'=>$Klasse,':lehrer'=>$Lehrkraft))){
-			echo '<p>Erfolgreich gespeichert</p>';
+			echo '<p>Erfolgreich gespeichert</p>'."\n";
 		} else {
 			echo "Error: " . $sql . "<br />" . $conn->error;
 		}
@@ -25,31 +25,31 @@ if ($_SESSION['Admin']==1){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
 		if ($rows==1){
-			echo '<table>';
-			echo '<form action="student_edit.php" method="post">';
+			echo '<table>'."\n";
+			echo '<form action="student_edit.php" method="post">'."\n";
 			foreach ($st as $erg){
 				for ($i=0;$i<=$cols-1;$i++){
 					$meta = $st->getColumnMeta($i);
-					echo '<tr><td>'.$meta['name'].'</td>';
+					echo '<tr><td>'.$meta['name'].'</td>'."\n";
 					if ($i==4){										//Spinner f�r Rolle
-					echo '<td>';
-					echo '<select name="'.$meta['name'].'">';
-					echo '<option value="0"';	if ($erg[$meta['name']]==0) echo ' selected'; echo '>Sch&uuml;ler</option>';
-					echo '<option value="1"';	if ($erg[$meta['name']]==1) echo ' selected'; echo '>Lehrer</option>';
-					echo '</select>';
+					echo '<td>'."\n";
+					echo '<select name="'.$meta['name'].'">'."\n";
+					echo '<option value="0"';	if ($erg[$meta['name']]==0) echo ' selected'; echo '>Sch&uuml;ler</option>'."\n";
+					echo '<option value="1"';	if ($erg[$meta['name']]==1) echo ' selected'; echo '>Lehrer</option>'."\n";
+					echo '</select>'."\n";
 					}
-					else echo '<td><input type="Text" name="'.$meta['name'].'" Value='.($erg[$meta['name']]).' />';
-					echo '</td></tr>';
+					else echo '<td><input type="Text" name="'.$meta['name'].'" Value='.($erg[$meta['name']]).' />'."\n";
+					echo '</td></tr>'."\n";
 			}
 			}
 		}
-		echo '<tr><td colspan=2><input type="hidden" name="SID" value='.$ESID.' /><input type="Submit" value="Absenden" name="save" /> </td>';
-		echo '</tr>';
-		echo '</form></table>';
+		echo '<tr><td colspan=2><input type="hidden" name="SID" value='.$ESID.' /><input type="Submit" value="Absenden" name="save" /> </td>'."\n";
+		echo '</tr>'."\n";
+		echo '</form></table>'."\n";
 		}
-		else echo '<p>Abfrage liefert keine Datens�tze</p>';
+		else echo '<p>Abfrage liefert keine Datens�tze</p>'."\n";
 	}
-	else echo '<p>Datenbankaufruf fehlgeschlagen</p>';
+	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 	}
 else //header('location:index.php');
 include ('footer.php');

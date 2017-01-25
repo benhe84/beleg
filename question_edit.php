@@ -1,10 +1,10 @@
 <?php
 include ('header.php');
 if ($_SESSION['Admin']==1){
-    echo '<h1>Frage &auml;ndern</h1>';
-	echo '<div class="page_hint">';
+    echo '<h1>Frage &auml;ndern</h1>'."\n";
+	echo '<div class="page_hint">'."\n";
 	include ('question_hint.php');
-	echo '</div>';
+	echo '</div>'."\n";
 	if (isset($_POST['save'])){
 		$FNR = $_POST['fnr'];
 		$Frage = htmlentities(($_POST['Frage']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
@@ -20,9 +20,9 @@ if ($_SESSION['Admin']==1){
 		$db = new PDO($dsn, $user, $pwd);
 		$st = $db->prepare("UPDATE `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint  WHERE `fnr` = '".$FNR."'");
 		if ($st->execute(array(':frage' => $Frage, ':fragetyp'=> $Fragetyp, ':aw1' => $AW1, ':aw2' => $AW2, ':aw3' => $AW3, ':aw4' => $AW4, ':aw5' => $AW5, ':aw6' => $AW6,':hint'=>$Hinweis))){
-			echo '<p>Erfolgreich gespeichert</p>';
+			echo '<p>Erfolgreich gespeichert</p>'."\n";
 		} else {
-			echo '<p>Eintrag konnte nict gespeichert werden</p>';
+			echo '<p>Eintrag konnte nict gespeichert werden</p>'."\n";
 		}
 	}
 	if (isset($_POST['fnr'])){
@@ -33,43 +33,43 @@ if ($_SESSION['Admin']==1){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
 		if ($rows==1){
-			echo '<table>';
-			echo '<form action="question_edit.php" method="post">';
+			echo '<table>'."\n";
+			echo '<form action="question_edit.php" method="post">'."\n";
 			foreach ($st as $erg){
 				for ($i=0;$i<=$cols-1;$i++){
 					$meta = $st->getColumnMeta($i);
-					echo '<tr><td>'.$meta['name'].'</td>';
+					echo '<tr><td>'.$meta['name'].'</td>'."\n";
 					switch ($i) {
 						case 0:
-							echo '<td><textarea name="'.$meta['name'].'" cols="35" rows="4">'.($erg[$meta['name']]).'</textarea>';
-							echo '</td></tr>';
+							echo '<td><textarea name="'.$meta['name'].'" cols="30" rows="4">'.($erg[$meta['name']]).'</textarea>'."\n";
+							echo '</td></tr>'."\n";
 							break;
 						case 1:
-							echo '<td>';
-							echo '<select name="'.$meta['name'].'">';
-							echo '<option value="0"';	if ($erg[$meta['name']]==0) echo ' selected'; echo '>Freie Frage</option>';
-							echo '<option value="1"';	if ($erg[$meta['name']]==1) echo ' selected'; echo '>MultipleChoice (1)</option>';
-							echo '<option value="2"';	if ($erg[$meta['name']]==2) echo ' selected'; echo '>MultipleChoice (2)</option>';
-							echo '<option value="3"';	if ($erg[$meta['name']]==3) echo ' selected'; echo '>MultipleChoice (3)</option>';
-							echo '<option value="4"';	if ($erg[$meta['name']]==4) echo ' selected'; echo '>MultipleChoice (4)</option>';
-							echo '<option value="5"';	if ($erg[$meta['name']]==5) echo ' selected'; echo '>MultipleChoice (5)</option>';
-							echo '<option value="6"';	if ($erg[$meta['name']]==6) echo ' selected'; echo '>MultipleChoice (6)</option>';
-							echo '</select>';       
+							echo '<td>'."\n";
+							echo '<select name="'.$meta['name'].'">'."\n";
+							echo '<option value="0"';	if ($erg[$meta['name']]==0) echo ' selected'; echo '>Freie Frage</option>'."\n";
+							echo '<option value="1"';	if ($erg[$meta['name']]==1) echo ' selected'; echo '>MultipleChoice (1)</option>'."\n";
+							echo '<option value="2"';	if ($erg[$meta['name']]==2) echo ' selected'; echo '>MultipleChoice (2)</option>'."\n";
+							echo '<option value="3"';	if ($erg[$meta['name']]==3) echo ' selected'; echo '>MultipleChoice (3)</option>'."\n";
+							echo '<option value="4"';	if ($erg[$meta['name']]==4) echo ' selected'; echo '>MultipleChoice (4)</option>'."\n";
+							echo '<option value="5"';	if ($erg[$meta['name']]==5) echo ' selected'; echo '>MultipleChoice (5)</option>'."\n";
+							echo '<option value="6"';	if ($erg[$meta['name']]==6) echo ' selected'; echo '>MultipleChoice (6)</option>'."\n";
+							echo '</select>'."\n";
 							break;
 						default:
-							echo '<td><input type="Text" name="'.$meta['name'].'" Value="'.($erg[$meta['name']]).'" />';
-							echo '</td></tr>';
+							echo '<td><input type="Text" name="'.$meta['name'].'" Value="'.($erg[$meta['name']]).'" />'."\n";
+							echo '</td></tr>'."\n";
 					}
 				}
 			}
 		}
-		echo '<tr><td colspan=2><input type="hidden" name="fnr" value='.$FNR.' /><input type="Submit" value="Absenden" name="save" /> </td>';
-		echo '</tr>';
-		echo '</form></table>';
+		echo '<tr><td colspan=2><input type="hidden" name="fnr" value='.$FNR.' /><input type="Submit" value="Absenden" name="save" /> </td>'."\n";
+		echo '</tr>'."\n";
+		echo '</form></table>'."\n";
 		}
-		else echo '<p>Abfrage liefert keine Datens�tze</p>';
+		else echo '<p>Abfrage liefert keine Datens�tze</p>'."\n";
 	}
-	else echo '<p>Datenbankaufruf fehlgeschlagen</p>';
+	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 	}
 else header('location:index.php');
 include ('footer.php');

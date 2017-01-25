@@ -244,6 +244,7 @@ h3{
 	padding: 20px;
 }
 .knowledge table {
+	table-layout: fixed;
 	margin: 0 0 15px;
 	width: 100%;
 	border-collapse: collapse;
@@ -256,6 +257,7 @@ h3{
     background: #0098BC;
     }
 .knowledge td{
+	text-align: left;
 	border: 1px solid #CCC;
 	padding: 5px 10px;
     background: #FFFFFF;
@@ -276,8 +278,8 @@ pre {
     display: block;
     overflow: auto;
     font-family: monospace;
-
     line-height: 1.5em;
     background: #eeeeee;
     margin-bottom:1em;
+    white-space: pre;
 }

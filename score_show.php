@@ -7,23 +7,23 @@ if ($_SESSION['Admin']==1){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
 		if ($rows>0){
-			echo '<table><tr>';
+			echo '<table><tr>'."\n";
 			for ($i=2;$i<=$cols-1;$i++){
 				$meta = $st->getColumnMeta($i);
-				echo '<th>'.$meta['name'].'</th>';
+				echo '<th>'.$meta['name'].'</th>'."\n";
 			}
-			echo '<th>Zur&uuml;cksetzen</th></tr>';
+			echo '<th>Zur&uuml;cksetzen</th></tr>'."\n";
 			foreach ($st as $erg){
-				echo '<tr>';
-				echo '<td>'.$erg[1].', '.$erg[2].'</td>';
-				echo '<td>'.$erg[3].'</td>';
-                echo '<td><Form action="score_delete.php" method="post"><input type="hidden" name="SID" value='.$erg[0].' /><input type="Submit" value="Reset" name="edit"></form></td></tr>';
+				echo '<tr>'."\n";
+				echo '<td>'.$erg[1].', '.$erg[2].'</td>'."\n";
+				echo '<td>'.$erg[3].'</td>'."\n";
+                echo '<td><Form action="score_delete.php" method="post"><input type="hidden" name="SID" value='.$erg[0].' /><input type="Submit" value="Reset" name="edit"></form></td></tr>'."\n";
 			}
-			echo '</table>';
+			echo '</table>'."\n";
 		}
-	else echo '<p>Abfrage liefert keine Datens&auml;tze</p>';
+	else echo '<p>Abfrage liefert keine Datens&auml;tze</p>'."\n";
 	}
-	else echo '<p>Datenbankaufruf fehlgeschlagen</p>';
+	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 }
 else header('location:index.php');
 include ('footer.php');

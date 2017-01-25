@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="de">
 <head>
+
 	<link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta name="description" content="" />
@@ -45,9 +45,9 @@ else {
 	if ($result=$db->query($sql)){
 		$cols = $result->rowCount();
 		if ($cols>0){
-			echo '<ul>';
+			echo '<ul>'."\n";
 			foreach ($result as $main){
-				echo '<li class="'.$main[0].'"><a href="'.$main[1].'">'.$main[0].'</a>';
+				echo '<li class="'.$main[0].'"><a href="'.$main[1].'">'.$main[0].'</a>'."\n";
 				if ($admin==1){
 					$sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 1";			
 				}
@@ -60,14 +60,14 @@ else {
 					}
 				}
 				if ($result1=$db->query($sql1)){
-					echo '<ul>';
+					echo '<ul>'."\n";
 					foreach ($result1 as $entry){
-						echo '<li><a href="'.$entry[1].'">'.$entry[0].'</a></li>';
+						echo '<li><a href="'.$entry[1].'">'.$entry[0].'</a></li>'."\n";
 					}
-					echo '</ul></li>';
+					echo '</ul></li>'."\n";
 				}
 			}
-			echo '</ul>';
+			echo '</ul>'."\n";
 		}
 	} 
 ?>

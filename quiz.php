@@ -33,7 +33,7 @@ function auswertung(){
     $st = ("SELECT * FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
     $erg=$db->query($st);
     $reachable = (($erg->rowCount())*5);
-    echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>';
+    echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>'."\n";
 }
 
 include('header.php');
@@ -65,31 +65,29 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 			else {$solved=false;}
 		}
 		if (($question->rowCount())==1){
-			echo '<h1>'.$erg['frage'].'</h1>';
-			echo '<form action="quiz.php" method="post">';
+			echo '<h1>'.$erg['frage'].'</h1>'."\n";
+			echo '<form action="quiz.php" method="post">'."\n";
 			// Freitexteingabefragen
 			if ($erg['fragetyp']==0){
 				//Auswertung
 				if ($try>=1 ){
-					for ($i=1;$i<=6;$i++){
-						if(htmlentities(($_POST['frantwort']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw0'.$i]){
-							$awresult=true;
-							$points=floor(5/$_SESSION['Versuch']);
-							break;}
-					}
+					if(preg_match($erg['aw01'],htmlentities(($_POST['frantwort']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1'))){
+					    $awresult=true;
+                        $points=floor(5/$_SESSION['Versuch']);
+                    }
 				}
 				if ($try<= 1){
 					if (!$awresult) {
-						echo '<h2>Dies ist Ihr '.($_SESSION['Versuch']+1).'.Versuch</h2>';
-						if ($try==1){echo '<div class="hint">'.$erg['hint'].'</div>';}
-						echo '<p>Bitte geben Sie die Antwort ein:</p>';
+						echo '<h2>Dies ist Ihr '.($_SESSION['Versuch']+1).'.Versuch</h2>'."\n";
+						if ($try==1){echo '<div class="hint">'.$erg['hint'].'</div>'."\n";}
+						echo '<p>Bitte geben Sie die Antwort ein:</p>'."\n";
 					}
 				}
 				echo '<p><input type="text" name="frantwort"';
 				if (isset($_POST['frantwort'])) echo 'value="'.$_POST['frantwort'].'"';
 				if (($awresult)||($try== 2)) {echo ' readonly';} else {echo ' required';}
-				echo ' /></p>';
-				if ((!$awresult)&&($try== 2)) echo '<h2>Die Antwort war falsch.</h2>';
+				echo ' /></p>'."\n";
+				if ((!$awresult)&&($try== 2)) echo '<h2>Die Antwort war falsch.</h2>'."\n";
 			}
 			
 			//Multiple-Choice-Einfach-Wahl
@@ -103,21 +101,21 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 				//Fragestellen
 				if (($try<= 1)){
 					if (!$awresult) {
-						echo '<h2>Dies ist Ihr '.($_SESSION['Versuch']+1).'.Versuch</h2>';
-						if ($try==1){echo '<div class="hint">'.$erg['hint'].'</div>';}
-						echo '<p>Bitte w&auml;hle eine Antwort aus:</p>';
+						echo '<h2>Dies ist Ihr '.($_SESSION['Versuch']+1).'.Versuch</h2>'."\n";
+						if ($try==1){echo '<div class="hint">'.$erg['hint'].'</div>'."\n";}
+						echo '<p>Bitte w&auml;hle eine Antwort aus:</p>'."\n";
 					}
 					//Erzeuge Spinner mit Antworten
 					echo '<select name="dropdown"';
 					if (($awresult)||($try==2)) {echo ' disabled';};
-					echo '>';
+					echo '>'."\n";
 					for ($i=1;$i<=6;$i++){
 						$j=$_SESSION['fragen'][$i];
 						echo '<option value="'.$erg[$j].'"';
 						if (isset($_POST['answer'.($try-1)])) if ($_POST['dropdown']==$erg[$j]) echo ' selected';
-						echo '>'.$erg[$j].'</option>';
+						echo '>'.$erg[$j].'</option>'."\n";
 					}
-					echo '</select>';
+					echo '</select>'."\n";
 				}
 				
 			}
@@ -143,26 +141,26 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 				if ($try==0){choice_shuffle();}
 				//Fragestellen
 				if (!$awresult) {
-					if ($try>=1){echo '<div class="hint">'.$erg['hint'].'</div>';}
-					if (($try<=1)){echo '<h2>Dies ist Ihr '.($_SESSION['Versuch']+1).'.Versuch</h2>';}
-					if (($try<=1)){echo '<p>Bitte w&auml;hle alle richtigen Antworten aus:</p>';}
+					if ($try>=1){echo '<div class="hint">'.$erg['hint'].'</div>'."\n";}
+					if (($try<=1)){echo '<h2>Dies ist Ihr '.($_SESSION['Versuch']+1).'.Versuch</h2>'."\n";}
+					if (($try<=1)){echo '<p>Bitte w&auml;hle alle richtigen Antworten aus:</p>'."\n";}
 				}
 				for ($i=1;$i<=6;$i++){
 					$j=$_SESSION['fragen'][$i];
 					echo '<p><input type="checkbox"  value="'.$erg[$j].'" name="'.$i.'"';
 					if (isset($_POST[$i])) if ($_POST[$i]==$erg[$j]) echo ' checked="checked"';
 					if (($awresult)||($try==2)) {echo ' disabled';};
-					echo '/> '.$erg[$j].'</p>';
+					echo '/> '.$erg[$j].'</p>'."\n";
 				}
 			}
-			if ((!$awresult)&&(!($try==2))) echo '<br/><p><input type="submit" value="Pr&uuml;fe die Antwort" name="answer'.$try.'" /></p>';
-			echo '</form>';
-            if ($solved) echo '<h2>Die Frage wurde bereits beantwortet. Dieser Versuch wird nicht gewertet!</h2>';
+			if ((!$awresult)&&(!($try==2))) echo '<br />'."/n".'<p><input type="submit" value="Pr&uuml;fe die Antwort" name="answer'.$try.'" /></p>'."\n";
+			echo '</form>'."\n";
+            if ($solved) echo '<h2>Die Frage wurde bereits beantwortet. Dieser Versuch wird nicht gewertet!</h2>'."\n";
 			if (($awresult)||($try==2)) {
 				next_question();
-				if ($awresult) echo '<h3>Die Antwort war Richtig</h3>';
+				if ($awresult) echo '<h3>Die Antwort war Richtig</h3>'."\n";
 				echo '<h2>Du hast '.$points.' von 5 Punkten erreicht';
-				echo '<br/><br/><p><a href="quiz.php">N&auml;chste Frage</a>';
+				echo '<br />'."/n".'<br />'."/n".'<p><a href="quiz.php">N&auml;chste Frage</a>'."\n";
 			}
 		}
 		else{

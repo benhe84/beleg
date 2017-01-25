@@ -1,7 +1,6 @@
 <?php
 include ('header.php');
-echo '<script src="pwdcheck.js" type="text/javascript"></script>';
-echo '<h1>Sch&uuml;ler anlegen</h1>';
+echo '<h1>Sch&uuml;ler anlegen</h1>'."\n";
 if ((isset($_POST['senden'])) && (($_POST['EPWD1'])==($_POST['EPWD2']))){
 	$EMail = $_POST['EMail'];
 	$EVname = $_POST['EVname'];
@@ -15,43 +14,43 @@ if ((isset($_POST['senden'])) && (($_POST['EPWD1'])==($_POST['EPWD2']))){
 	$st = $db->prepare ("INSERT INTO `".$pre."user`(`e-mail`,`password`, `Name`, `Vorname`, `Klasse`) VALUES
 	(:mail,:pwd,:name,:vname,:klasse)");
 	if ($st->execute(array(':mail' => $EMail, ':pwd'=> $pwd_md5, ':name'=> $EName,':vname'=> $EVname,':klasse'=>$EKlasse))) {
-		echo '<table>';
-		echo '<tr>';
-		echo '<th colspan="2">Sch&uuml;ler erfolgreich hinzugef&uuml;gt</th>';
-		echo '</tr>';
-		echo '<tr><td>E-Mail</td><td>'.$EMail.'</td></tr>';
-		echo '<tr><td>Name</td><td>'.$EName.'</td></tr>';
-		echo '<tr><td>Vorname</td><td>'.$EVname.'</td></tr>';
-		echo '<tr><td>Klasse</td><td>'.$EKlasse.'</td></tr>';
-		echo '<td colspan="2"><a href="index.php">Zum Login</a></td></tr>';
-		echo '</table>';} 
+		echo '<table>'."\n";
+		echo '<tr>'."\n";
+		echo '<th colspan="2">Sch&uuml;ler erfolgreich hinzugef&uuml;gt</th>'."\n";
+		echo '</tr>'."\n";
+		echo '<tr><td>E-Mail</td><td>'.$EMail.'</td></tr>'."\n";
+		echo '<tr><td>Name</td><td>'.$EName.'</td></tr>'."\n";
+		echo '<tr><td>Vorname</td><td>'.$EVname.'</td></tr>'."\n";
+		echo '<tr><td>Klasse</td><td>'.$EKlasse.'</td></tr>'."\n";
+		echo '<td colspan="2"><a href="index.php">Zum Login</a></td></tr>'."\n";
+		echo '</table>'."\n";}
 	else {
-		echo "Es ist bereits ein Sch&uuml;ler mit dieser E-Mail Adresse registriert<br />";
-		echo '<a href="student_add.php">zur&uuml;ck</a></td></tr>';
+		echo "Es ist bereits ein Sch&uuml;ler mit dieser E-Mail Adresse registriert<br />/n";
+		echo '<a href="student_add.php">zur&uuml;ck</a></td></tr>'."\n";
 	}
 }
 
 else{
-	echo '<Form action="student_add.php" method="post">';
+	echo '<Form action="student_add.php" method="post">'."\n";
 	echo '<input type="e-mail" name="EMail" placeholder="E-Mail"';
 	if (isset($_POST["senden"])) echo ' Value='.($_POST['EMail']);
-	echo ' required /><br/>';
+	echo ' required /><br />'."\n";
 	echo '<input type="Text" name="EVname" placeholder="Vorname"';
 	if (isset($_POST["senden"])) echo ' Value='.($_POST['EVname']);
-	echo ' required /><br/>';
+	echo ' required /><br />'."\n";
 	echo '<input type="Text" name="EName" placeholder="Name"';
 	if (isset($_POST["senden"])) echo ' Value='.($_POST['EName']);
-	echo ' required /><br/>';
+	echo ' required /><br />'."\n";
 	echo '<input type="Text" name="EKlasse" placeholder="Klasse"';
 	if (isset($_POST["senden"])) echo ' Value='.($_POST['EKlasse']);
-	echo ' required /><br/>';
-	echo '<input type="password" name="EPWD1" placeholder="Passwort"><br/>';
-	// echo '<p id="strength">&nbsp;</p>';
-	echo '<input type="password" name="EPWD2" placeholder="Passwort wiederholen"><br/>';
-	// echo '<p id="valid">&nbsp;</p>';
+	echo ' required /><br />'."\n";
+	echo '<input type="password" name="EPWD1" placeholder="Passwort"><br />'."\n";
+	// echo '<p id="strength">&nbsp;</p>'."\n";
+	echo '<input type="password" name="EPWD2" placeholder="Passwort wiederholen"><br />'."\n";
+	// echo '<p id="valid">&nbsp;</p>'."\n";
 	if (isset($_POST["senden"])){echo 'Passw&ouml;rter stimmen nicht überein';}
-	echo '<input class="dropbtn" type="Submit" value="Sch&uuml;ler anlegen" name="senden">';
-	echo '</form>';
+	echo '<input class="dropbtn" type="Submit" value="Sch&uuml;ler anlegen" name="senden">'."\n";
+	echo '</form>'."\n";
 	
 } 
 include ('footer.php');
