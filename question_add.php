@@ -27,13 +27,13 @@ if ($_SESSION['Admin']==1){
     }
     else{
 ?>
-<----
 <form action="question_add.php" method="post">
     <table>
-        <tr><td><textarea name="Frage" placeholder="Hier die Frage eingeben" cols="35" rows="4"></textarea></td></tr>
+        <tr><td><label for"Frage">Hier die Frage eingeben</label></td><td><textarea name="Frage" id="Frage" placeholder="Hier die Frage eingeben" cols="35" rows="4"></textarea></td></tr>
         <tr>
             <td>
-                <select title="Fragentyp" name="Fragetyp">
+                <label for"Fragentyp">Fragetyp</label></td><td>
+                <select id="Fragetyp" title="Fragentyp" name="Fragetyp">
                     <option value="0">Freie Frage</option>
                     <option value="1">MultipleChoice (1)</option>
                     <option value="2">MultipleChoice (2)</option>
@@ -44,14 +44,14 @@ if ($_SESSION['Admin']==1){
                 </select>
             </td>
         </tr>
-        <tr><td><input name="Antwort_1" placeholder="Antwort 1"  type="Text"></td></tr>
-        <tr><td><input name="Antwort_2" placeholder="Antwort 2" type="Text"></td></tr>
-        <tr><td><input name="Antwort_3" placeholder="Antwort 3" type="Text"></td></tr>
-        <tr><td><input name="Antwort_4" placeholder="Antwort 3" type="Text"></td></tr>
-        <tr><td><input name="Antwort_5" placeholder="Antwort 4" type="Text"></td></tr>
-        <tr><td><input name="Antwort_6" placeholder="Antwort 5" type="Text"></td></tr>
-        <tr><td><input name="Hinweis" placeholder="Hinweis" type="Text"></td></tr>
-        <tr><td><input value="Frage anlegen" name="save" type="Submit"></td></tr>
+        <tr><td><label for"Antwort_1">Antwort 1</label></td><td><input id="Antwort_1" name="Antwort_1" placeholder="Antwort 1"  type="Text"></td></tr>
+        <tr><td><label for"Antwort_2">Antwort 2</label></td><td><input id="Antwort_2" name="Antwort_2" placeholder="Antwort 2" type="Text"></td></tr>
+        <tr><td><label for"Antwort_3">Antwort 3</label></td><td><input id="Antwort_3" name="Antwort_3" placeholder="Antwort 3" type="Text"></td></tr>
+        <tr><td><label for"Antwort_4">Antwort 4</label></td><td><input id="Antwort_4"  name="Antwort_4" placeholder="Antwort 3" type="Text"></td></tr>
+        <tr><td><label for"Antwort_5">Antwort 5</label></td><td><input id="Antwort_5"  name="Antwort_5" placeholder="Antwort 4" type="Text"></td></tr>
+        <tr><td><label for"Antwort_6">Antwort 6</label></td><td><input id="Antwort_6" name="Antwort_6" placeholder="Antwort 5" type="Text"></td></tr>
+        <tr><td><label for"Hinweis">Hier den Hinweis eingeben</label></td><td><input id="Hinweis" <input name="Hinweis" placeholder="Hinweis" type="Text"></td></tr>
+        <tr><td colspan="2"><input value="Frage anlegen" name="save" type="Submit"></td></tr>
     </table>
 </form>
     <?php

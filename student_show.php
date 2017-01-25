@@ -32,12 +32,12 @@ if ($_SESSION['Admin']==1){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
 		if ($rows>0){
-			echo '<table>';
+			echo '<table><tr>';
 			for ($i=1;$i<=$cols-1;$i++){
 				$meta = $st->getColumnMeta($i);
 				echo '<th>'.$meta['name'].'</th>';
 			}
-			echo '<th>Bearbeiten</th>';
+			echo '<th>Bearbeiten</th></tr>';
 			foreach ($st as $erg){
 				echo '<tr>';
 				for ($i=1;$i<=$cols-1;$i++){

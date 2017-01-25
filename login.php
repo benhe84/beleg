@@ -22,10 +22,12 @@ else{echo 'SQL Verbindung fehlgeschlagen';}
 else {
 	
 	echo '<form action="login.php" method="post">';
-	echo '<h2>Bitte geben Sie Ihre Nutzerdaten ein:</h2>';
-	echo '<p><input type="e-mail" style="width: 165px" name="email" placeholder="E-Mail"/></p>';
-	echo '<p><input type="password" style="width: 165px" name="password" placeholder="Passwort" /></p>';
-	echo '<p><input type="submit" name="submit_login" value="Login" /></p>';
+    echo '<h2>Bitte geben Sie Ihre Nutzerdaten ein:</h2>';
+    echo '<label for="email">E-Mail</label>';
+    echo '<p><input id="email" type="e-mail" style="width: 165px" name="email" placeholder="E-Mail"/></p>';
+    echo '<label for="password">Passwort</label>';
+    echo '<p><input id="Passwort" type="password" style="width: 165px" name="password" placeholder="Passwort" /></p>';
+    echo '<p><input type="submit" name="submit_login" value="Login" /></p>';
 	echo '</form>';
 }
 include ('footer.php');

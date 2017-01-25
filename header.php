@@ -13,7 +13,8 @@
 <body>
 <div class="wrap">
 <a href="index.php" id="logo">PHPquiz</a>
-<div class="topnav">
+    <nav>
+    <div class="topnav">
 <?php
 session_start();
 include ("config.php");
@@ -31,7 +32,7 @@ else {
 	// Create PDO
 	$db = new PDO($dsn, $user, $pwd);
 	if ($admin == 1){
-		$sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `logout`=0";
+        $sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `logout`=0";
 	}
 	else{
 		if ($login == 1){
@@ -70,5 +71,6 @@ else {
 		}
 	} 
 ?>
-</div>
+    </div>
+    </nav>
 <div class="content">

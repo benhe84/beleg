@@ -1,5 +1,6 @@
 <?php
 include ('header.php');
+echo '<script src="pwdcheck.js" type="text/javascript"></script>';
 echo '<h1>Sch&uuml;ler anlegen</h1>';
 if ((isset($_POST['senden'])) && (($_POST['EPWD1'])==($_POST['EPWD2']))){
 	$EMail = $_POST['EMail'];
@@ -45,7 +46,9 @@ else{
 	if (isset($_POST["senden"])) echo ' Value='.($_POST['EKlasse']);
 	echo ' required /><br/>';
 	echo '<input type="password" name="EPWD1" placeholder="Passwort"><br/>';
+	// echo '<p id="strength">&nbsp;</p>';
 	echo '<input type="password" name="EPWD2" placeholder="Passwort wiederholen"><br/>';
+	// echo '<p id="valid">&nbsp;</p>';
 	if (isset($_POST["senden"])){echo 'Passw&ouml;rter stimmen nicht überein';}
 	echo '<input class="dropbtn" type="Submit" value="Sch&uuml;ler anlegen" name="senden">';
 	echo '</form>';
