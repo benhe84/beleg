@@ -153,14 +153,14 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 					echo '/> '.$erg[$j].'</p>'."\n";
 				}
 			}
-			if ((!$awresult)&&(!($try==2))) echo '<br />'."/n".'<p><input type="submit" value="Pr&uuml;fe die Antwort" name="answer'.$try.'" /></p>'."\n";
+			if ((!$awresult)&&(!($try==2))) echo '<br /><p><input type="submit" value="Pr&uuml;fe die Antwort" name="answer'.$try.'" /></p>'."\n";
 			echo '</form>'."\n";
             if ($solved) echo '<h2>Die Frage wurde bereits beantwortet. Dieser Versuch wird nicht gewertet!</h2>'."\n";
 			if (($awresult)||($try==2)) {
 				next_question();
 				if ($awresult) echo '<h3>Die Antwort war Richtig</h3>'."\n";
-				echo '<h2>Du hast '.$points.' von 5 Punkten erreicht';
-				echo '<br />'."/n".'<br />'."/n".'<p><a href="quiz.php">N&auml;chste Frage</a>'."\n";
+				echo '<h2>Du hast '.$points.' von 5 Punkten erreicht</h2>'."\n";
+				echo '<br /><br /><p><a href="quiz.php">N&auml;chste Frage</a>'."\n";
 			}
 		}
 		else{

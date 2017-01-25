@@ -143,7 +143,7 @@
     </column>
     <column id="48" parent="22" name="aw01">
       <Position>4</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>varchar(100)|0</DataType>
     </column>
     <column id="49" parent="22" name="aw02">
       <Position>5</Position>
