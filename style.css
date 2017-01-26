@@ -235,6 +235,10 @@ h3{
 	border-radius: 8px;
 	outline-style: none;
 }
+.page_hint ul {
+	list-style-position: inside;
+	list-style-type: square;
+}
 /* ==============================================
    Wissensvermittlung
    ============================================== */

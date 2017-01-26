@@ -14,5 +14,5 @@
 <p>In in das Feld Antwort 1 die Richtige L&ouml;sung einzutrag. Die anderen Felder mit falschen Antworten f&uuml;llen.</p>
 <hr />
 <h4>Multiple-Choice Mehrfachwahlfragen</h4>
-<p>Je nach Auswahl sind die Antworten 1-Gew&auml;hlt die richtigen. Di anderen Felder mit falschen Antworten füllen.<br/>
+<p>Je nach Auswahl sind die Antworten 1-Gew&auml;hlt die richtigen. Die anderen Felder mit falschen Antworten füllen.<br/>
 Es wird nur Richtig ausgewertet, wenn nur alle richtigen Antworten gew&auml;hlt sind.</p>

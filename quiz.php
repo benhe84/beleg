@@ -44,7 +44,7 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 	else $_SESSION['quest']=1;
 	// Initialisierung der Versuche
 	if(!isset($_SESSION['Versuch'])){$_SESSION['Versuch']=0;}
-	// Antwort auf Falsch bzw. Ungeprüft setzen
+	// Antwort auf Falsch setzen
 	$awresult=false;
 	// Zählt auf Versuche
 	if ((($_SESSION['Versuch'])==0)&&(isset($_POST['answer0']))) $_SESSION['Versuch']++;
@@ -58,19 +58,22 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 	if ($question=$db->query($sqlq)){
 		$erg = $question->fetch();
 		$qnr = $erg['fnr'];
-		// Prüft ob Frage bereits gelöst wurde.
-		$sqlaw = ("SELECT * FROM `".$pre."quiz_gefragt` WHERE `sid` = ".$_SESSION['SID']." && `fnr` = ".$qnr);
-		if ($solve=$db->query($sqlaw)){
-			if (($solve->rowCount())==1){$solved=true;}
-			else {$solved=false;}
-		}
-		if (($question->rowCount())==1){
-			echo '<h1>'.$erg['frage'].'</h1>'."\n";
+		// Prüft ob eine Frage vorhanden ist
+        if (($question->rowCount())==1){
+            // Prüft ob Frage bereits gelöst wurde.
+            $sqlaw = ("SELECT * FROM `".$pre."quiz_gefragt` WHERE `sid` = ".$_SESSION['SID']." && `fnr` = ".$qnr);
+            if ($solve=$db->query($sqlaw)){
+                if (($solve->rowCount())==1){$solved=true;}
+                else {$solved=false;}
+            }
+            // Frage wird ausgegeben
+            echo '<h1>'.$erg['frage'].'</h1>'."\n";
 			echo '<form action="quiz.php" method="post">'."\n";
-			// Freitexteingabefragen
+			// Prüft auf Freitexteingabefragen
 			if ($erg['fragetyp']==0){
 				//Auswertung
 				if ($try>=1 ){
+				    //Prüft ob Eingegebene Daten mit dem gespeicherten Regulären Ausdruck übereinstimmen
 					if(preg_match($erg['aw01'],htmlentities(($_POST['frantwort']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1'))){
 					    $awresult=true;
                         $points=floor(5/$_SESSION['Versuch']);
@@ -90,11 +93,16 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 				if ((!$awresult)&&($try== 2)) echo '<h2>Die Antwort war falsch.</h2>'."\n";
 			}
 			
-			//Multiple-Choice-Einfach-Wahl
+			// Prüft auf Multiple-Choice-Einfach-Wahl
 			if ($erg['fragetyp']==1){
 				//Auswertung
 				if ($try>=1){
-					if(htmlentities(($_POST['dropdown']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw01']){$awresult=true;$points=floor(5/$_SESSION['Versuch']);}
+				    //Prüft ob gewählte Antwort richtig
+					if(htmlentities(($_POST['dropdown']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw01']){
+                        $awresult=true;
+                        //Berechnet die Punkte
+                        $points=floor(5/$_SESSION['Versuch']);
+					}
 				}
 				//Zufällige Anordnung der Antworten im 1. Versuch
 				if ($try==0){choice_shuffle();}
@@ -119,23 +127,27 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 				}
 				
 			}
-			//Multiple-Choice-Mehrfach-Wahl
+			// Prüft auf Multiple-Choice-Mehrfach-Wahl
 			if ($erg['fragetyp']>=2){
 				//Auswertung
 				if ($try>=1){
 					$fixed=0;					//Anzahl der gewählten Boxen
 					$correct=0;					//Anzahl der richtig gewählten Boxen
 					$opted=$erg['fragetyp'];	//Anzahl der richtigen Boxen
-					for ($i=1;$i<=$opted;$i++){
+					// Prüft die Richtig gewählten Boxen
+                    for ($i=1;$i<=$opted;$i++){
 						for($j=1;$j<=6;$j++){
 							if(isset($_POST[$j])){if(htmlentities(($_POST[$j]), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1')==$erg['aw0'.$i]){$correct++;}}
 						}
 					}
+                    // Zählt alle gewählten Boxen
 					for($j=1;$j<=6;$j++){if(isset($_POST[$j])){$fixed++;}}
+                    // Prüft ob alle und nur die richtigen Antworten gewählt wurden
 					if(($fixed==$correct)&&($fixed==$opted)){
 						$awresult=true;
 					}
-					$points=floor(5/$opted*$correct);
+					//Berechnet die Punkte
+					$points=floor((5/$opted*$correct)/$_SESSION['Versuch']);
 				}
 				//Zufällige Anordnung der Antworten im 1. Versuch
 				if ($try==0){choice_shuffle();}
@@ -164,15 +176,11 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 			}
 		}
 		else{
-		auswertung();
-		/*	========================================================================================
-		Beginn des Testcodes
-		========================================================================================*/
-		$_SESSION['quest']=1;
-		$_SESSION['Versuch']=0;
-	/*	========================================================================================
-		Ende des Testcodes
-		========================================================================================*/
+            // Startet die Auswertung des Tests
+            auswertung();
+            // Setzt die Fragen zurück
+		    $_SESSION['quest']=1;
+		    $_SESSION['Versuch']=0;
 		}
 	}
 	else echo 'Datenbankaufruf fehlgeschlagen';
