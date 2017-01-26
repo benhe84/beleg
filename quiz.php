@@ -88,7 +88,7 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 				}
 				echo '<p><input type="text" name="frantwort"';
 				if (isset($_POST['frantwort'])) echo 'value="'.$_POST['frantwort'].'"';
-				if (($awresult)||($try== 2)) {echo ' readonly';} else {echo ' required';}
+				if (($awresult)||($try== 2)) {echo ' readonly="true"';} else {echo ' required';}
 				echo ' /></p>'."\n";
 				if ((!$awresult)&&($try== 2)) echo '<h2>Die Antwort war falsch.</h2>'."\n";
 			}

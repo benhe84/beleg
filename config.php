@@ -1,10 +1,6 @@
 <?php
-// ServerName
-$servername = "localhost";
-// Datenbankname
-$dbname = "quizcards";
 // "Data Source Name" bestehend aus Datenbankname und Hostname
-$dsn="mysql:dbname=".$dbname.";host=".$servername;
+$dsn="mysql:dbname=quizcards;host=localhost";
 // "User" Name des Datenbanknutzers
 $user="root";
 // "PWD" Passwort des Datenbanknutzers

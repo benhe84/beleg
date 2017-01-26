@@ -26,10 +26,9 @@ else {
 	$admin ="0";
 	$login ="0";
 }
-
-
 	// Create PDO
 	$db = new PDO($dsn, $user, $pwd);
+    // Generiert SQL String für Hauptmenü
 	if ($admin == 1){
         $sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `logout`=0";
 	}
@@ -46,7 +45,9 @@ else {
 		if ($cols>0){
 			echo '<ul>'."\n";
 			foreach ($result as $main){
+			    // Erzeugt Hauptmnüeinträge
 				echo '<li class="'.$main[0].'"><a href="'.$main[1].'">'.$main[0].'</a>'."\n";
+				// Generiert SQL String für Untermenüs
 				if ($admin==1){
 					$sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 1";			
 				}
@@ -58,13 +59,14 @@ else {
 						$sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 0 && `bhe_navi_entries`.`admin` = 0";
 					}
 				}
-				if ($result1=$db->query($sql1)){
-					echo '<ul>'."\n";
-					foreach ($result1 as $entry){
-						echo '<li><a href="'.$entry[1].'">'.$entry[0].'</a></li>'."\n";
-					}
-					echo '</ul></li>'."\n";
-				}
+                if ($result1=$db->query($sql1)){
+                    echo '<ul>'."\n";
+                    foreach ($result1 as $entry){
+                        // Erzeugt Untermenüeinträge
+                        echo '<li><a href="'.$entry[1].'">'.$entry[0].'</a></li>'."\n";
+                    }
+                    echo '</ul></li>'."\n";
+                }
 			}
 			echo '</ul>'."\n";
 		}
