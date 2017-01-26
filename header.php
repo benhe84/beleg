@@ -13,8 +13,7 @@
 <body>
 <div class="wrap">
 <a href="index.php" id="logo">PHPquiz</a>
-    <nav>
-    <div class="topnav">
+    <div class="nav">
 <?php
 session_start();
 include ("config.php");
@@ -72,5 +71,5 @@ else {
 	} 
 ?>
     </div>
-    </nav>
+    </div>
 <div class="content">
