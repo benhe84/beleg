@@ -46,9 +46,6 @@ tr:hover {background-color: rgba(0,0,0,0.1)}
 /* ==============================================
    Formularelemente
    ============================================== */
-form {
-  padding: 20px;
-}
 input[type="text"],input[type="password"],input[type="e-mail"] {
 	margin: 5px;
 	padding: 2px 16px; 
@@ -221,16 +218,23 @@ h3{
    ============================================== */
 .page_hint {
 	float:right;
-	width: 20%;
+	width: 30%;
 	font-size: 90%;
 	background-color: #fff9df;
-	padding: 0 10px;
+	padding: 0px 10px;
 	border-top: 3px solid #f3c600;
 	border-bottom: 3px solid #f3c600;
-	margin: 0px 10px 10px;
+	margin: 10px 10px;
 }
 .page_hint h3{
 	color:#73ce41;}
+.page_hint input[type="text"]{
+	height: 25px;
+	width: 80%;
+	font-size: 1em;
+	border-radius: 8px;
+	outline-style: none;
+}
 /* ==============================================
    Wissensvermittlung
    ============================================== */
