@@ -7,4 +7,3 @@ if ($_SESSION['Login']){
 	}
     else header('location:login.php');
 include ('footer.php');
-?>

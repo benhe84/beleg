@@ -27,4 +27,3 @@ if ($_SESSION['Login']==1)
 }
 else header('location:index.php');
 include ('footer.php');
-?>

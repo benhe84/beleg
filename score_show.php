@@ -27,4 +27,3 @@ if ($_SESSION['Admin']==1){
 }
 else header('location:index.php');
 include ('footer.php');
-?>

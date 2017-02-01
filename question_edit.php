@@ -16,7 +16,7 @@ if ($_SESSION['Admin']==1){
         $AW5 = htmlentities(($_POST['Antwort_5']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
         $AW6 = htmlentities(($_POST['Antwort_6']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
         $Hinweis = htmlentities(($_POST['Hinweis']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
-		// Create connection
+		//Create PDO
 		$db = new PDO($dsn, $user, $pwd);
 		$st = $db->prepare("UPDATE `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint  WHERE `fnr` = '".$FNR."'");
 		if ($st->execute(array(':frage' => $Frage, ':fragetyp'=> $Fragetyp, ':aw1' => $AW1, ':aw2' => $AW2, ':aw3' => $AW3, ':aw4' => $AW4, ':aw5' => $AW5, ':aw6' => $AW6,':hint'=>$Hinweis))){
@@ -67,10 +67,9 @@ if ($_SESSION['Admin']==1){
 		echo '</tr>'."\n";
 		echo '</form></table>'."\n";
 		}
-		else echo '<p>Abfrage liefert keine Datens�tze</p>'."\n";
+		else echo '<p>Abfrage liefert keine Datens&auml;tze</p>'."\n";
 	}
 	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 	}
 else header('location:index.php');
 include ('footer.php');
-?>

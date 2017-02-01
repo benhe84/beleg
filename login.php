@@ -2,8 +2,8 @@
 include ('header.php');
 echo '<h1>Login</h1>'."\n";
 if (isset($_POST['submit_login'])){
-	$f_email=$_POST['email'];
-	$f_password=md5($_POST['password']);
+	$f_email=$_POST['Mail'];
+	$f_password=md5($_POST['PWD']);
 	$db = new PDO($dsn, $user, $pwd);
 	$st = $db->prepare("SELECT* FROM `".$pre."user` WHERE `e-mail` = :mail && `password`= :pwd");
 	if ($st->execute(array(':mail' => $f_email, ':pwd'=> $f_password))){
@@ -23,12 +23,11 @@ else {
 	
 	echo '<form action="login.php" method="post">'."\n";
     echo '<h2>Bitte geben Sie Ihre Nutzerdaten ein:</h2>'."\n";
-    echo '<label for="email">E-Mail</label>'."\n";
-    echo '<p><input id="email" type="e-mail" style="width: 165px" name="email" placeholder="E-Mail"/></p>'."\n";
-    echo '<label for="password">Passwort</label>'."\n";
-    echo '<p><input id="Passwort" type="password" style="width: 165px" name="password" placeholder="Passwort" /></p>'."\n";
+    echo '<label for="Mail">E-Mail</label>'."\n";
+    echo '<p><input id="Mail" type="e-mail" style="width: 165px" name="Mail" placeholder="E-Mail"/></p>'."\n";
+    echo '<label for="PWD">Passwort</label>'."\n";
+    echo '<p><input id="PWD" type="password" style="width: 165px" name="PWD" placeholder="Passwort" /></p>'."\n";
     echo '<p><input type="submit" name="submit_login" value="Login" /></p>'."\n";
 	echo '</form>'."\n";
 }
 include ('footer.php');
-?>

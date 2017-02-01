@@ -187,4 +187,3 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 }
 else header('location:index.php');
 include ('footer.php');
-?>

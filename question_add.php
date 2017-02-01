@@ -15,7 +15,7 @@ if ($_SESSION['Admin']==1){
         $AW5 = $_POST['Antwort_5'];
         $AW6 = $_POST['Antwort_6'];
         $Hinweis = $_POST['Hinweis'];
-        // Create connection
+        //Create PDO
         $db = new PDO($dsn, $user, $pwd);
         //INSERT INTO `bhe_quiz_fragen`(`fnr`, `frage`, `fragetyp`, `aw01`, `aw02`, `aw03`, `aw04`, `aw05`, `aw06`, `hint`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10])
         $st = $db->prepare("INSERT INTO `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint");
@@ -48,9 +48,9 @@ if ($_SESSION['Admin']==1){
             <tr><td><label for="Antwort_1">Antwort 1</label><input id="Antwort_1" name="Antwort_1" placeholder="Antwort 1"  type="Text"></td></tr>
             <tr><td><label for="Antwort_2">Antwort 2</label><input id="Antwort_2" name="Antwort_2" placeholder="Antwort 2" type="Text"></td></tr>
             <tr><td><label for="Antwort_3">Antwort 3</label><input id="Antwort_3" name="Antwort_3" placeholder="Antwort 3" type="Text"></td></tr>
-            <tr><td><label for="Antwort_4">Antwort 4</label><input id="Antwort_4"  name="Antwort_4" placeholder="Antwort 3" type="Text"></td></tr>
-            <tr><td><label for="Antwort_5">Antwort 5</label><input id="Antwort_5"  name="Antwort_5" placeholder="Antwort 4" type="Text"></td></tr>
-            <tr><td><label for="Antwort_6">Antwort 6</label><input id="Antwort_6" name="Antwort_6" placeholder="Antwort 5" type="Text"></td></tr>
+            <tr><td><label for="Antwort_4">Antwort 4</label><input id="Antwort_4"  name="Antwort_4" placeholder="Antwort 4" type="Text"></td></tr>
+            <tr><td><label for="Antwort_5">Antwort 5</label><input id="Antwort_5"  name="Antwort_5" placeholder="Antwort 5" type="Text"></td></tr>
+            <tr><td><label for="Antwort_6">Antwort 6</label><input id="Antwort_6" name="Antwort_6" placeholder="Antwort 6" type="Text"></td></tr>
             <tr><td><label for="Hinweis">Hinweis</label><input id="Hinweis" name="Hinweis" placeholder="Hinweis" type="Text"></td></tr>
             <tr><td><input value="Frage anlegen" name="save" type="Submit"></td></tr>
         </table>

@@ -7,4 +7,3 @@ $user="root";
 $pwd="82417395";
 // Tabellenprefix
 $pre="bhe_";
-?>

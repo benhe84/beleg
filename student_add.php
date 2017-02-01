@@ -8,12 +8,13 @@ if ((isset($_POST['senden'])) && (($_POST['EPWD1'])==($_POST['EPWD2']))){
 	$EPWD = $_POST['EPWD1'];
 	$EKlasse = $_POST['EKlasse'];
 	$pwd_md5= md5($EPWD);
-	// Create connection
+	// Create PDO
 	$db = new PDO($dsn, $user, $pwd);
-	// Check connection
+	// Prepare PDO Statement
 	$st = $db->prepare ("INSERT INTO `".$pre."user`(`e-mail`,`password`, `Name`, `Vorname`, `Klasse`) VALUES
-	(:mail,:pwd,:name,:vname,:klasse)");
-	if ($st->execute(array(':mail' => $EMail, ':pwd'=> $pwd_md5, ':name'=> $EName,':vname'=> $EVname,':klasse'=>$EKlasse))) {
+	(:mail,:pwd,:fname,:vname,:klasse)");
+	// Exceute PDO Statement
+	if ($st->execute(array(':mail' => $EMail, ':pwd'=> $pwd_md5, ':fname'=> $EName,':vname'=> $EVname,':klasse'=>$EKlasse))) {
 		echo '<table>'."\n";
 		echo '<tr>'."\n";
 		echo '<th colspan="2">Sch&uuml;ler erfolgreich hinzugef&uuml;gt</th>'."\n";
@@ -54,4 +55,3 @@ else{
 	
 } 
 include ('footer.php');
-?>
