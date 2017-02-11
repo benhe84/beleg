@@ -1,5 +1,6 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 echo '<h1>Sch&uuml;ler anlegen</h1>'."\n";
 if ((isset($_POST['senden'])) && (($_POST['EPWD1'])==($_POST['EPWD2']))){
 	$EMail = $_POST['EMail'];
@@ -8,9 +9,9 @@ if ((isset($_POST['senden'])) && (($_POST['EPWD1'])==($_POST['EPWD2']))){
 	$EPWD = $_POST['EPWD1'];
 	$EKlasse = $_POST['EKlasse'];
 	$pwd_md5= md5($EPWD);
-	// Create PDO
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	// Prepare PDO Statement
+	// Bereite PDO Statement vor
 	$st = $db->prepare ("INSERT INTO `".$pre."user`(`e-mail`,`password`, `Name`, `Vorname`, `Klasse`) VALUES
 	(:mail,:pwd,:fname,:vname,:klasse)");
 	// Exceute PDO Statement
@@ -53,5 +54,6 @@ else{
 	echo '<input class="dropbtn" type="Submit" value="Sch&uuml;ler anlegen" name="senden">'."\n";
 	echo '</form>'."\n";
 	
-} 
+}
+// Bindet den Footer der Seite ein
 include ('footer.php');

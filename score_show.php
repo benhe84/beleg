@@ -1,8 +1,11 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 if ($_SESSION['Admin']==1){
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	$st = $db->prepare("SELECT ".$pre."user.sid, Vorname, Name, SUM(`points`) as 'Punkte' FROM ".$pre."user INNER JOIN ".$pre."quiz_gefragt ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid GROUP BY Name ORDER BY Name");
+    // Bereite PDO Statement vor
+    $st = $db->prepare("SELECT ".$pre."user.sid, Vorname, Name, SUM(`points`) as 'Punkte' FROM ".$pre."user INNER JOIN ".$pre."quiz_gefragt ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid GROUP BY Name ORDER BY Name");
 	if ($st->execute()){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
@@ -25,5 +28,7 @@ if ($_SESSION['Admin']==1){
 	}
 	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

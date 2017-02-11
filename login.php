@@ -1,11 +1,14 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 echo '<h1>Login</h1>'."\n";
 if (isset($_POST['submit_login'])){
 	$f_email=$_POST['Mail'];
 	$f_password=md5($_POST['PWD']);
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	$st = $db->prepare("SELECT* FROM `".$pre."user` WHERE `e-mail` = :mail && `password`= :pwd");
+    // Bereite PDO Statement vor
+    $st = $db->prepare("SELECT* FROM `".$pre."user` WHERE `e-mail` = :mail && `password`= :pwd");
 	if ($st->execute(array(':mail' => $f_email, ':pwd'=> $f_password))){
 	$row=$st->rowCount();
     if ($row==1){
@@ -30,4 +33,5 @@ else {
     echo '<p><input type="submit" name="submit_login" value="Login" /></p>'."\n";
 	echo '</form>'."\n";
 }
+// Bindet den Footer der Seite ein
 include ('footer.php');

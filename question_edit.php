@@ -1,5 +1,6 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 if ($_SESSION['Admin']==1){
     echo '<h1>Frage &auml;ndern</h1>'."\n";
 	echo '<div class="page_hint">'."\n";
@@ -16,9 +17,10 @@ if ($_SESSION['Admin']==1){
         $AW5 = htmlentities(($_POST['Antwort_5']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
         $AW6 = htmlentities(($_POST['Antwort_6']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
         $Hinweis = htmlentities(($_POST['Hinweis']), ENT_QUOTES| ENT_SUBSTITUTE, 'ISO8859-1');
-		//Create PDO
+		//Erzeuge PDO
 		$db = new PDO($dsn, $user, $pwd);
-		$st = $db->prepare("UPDATE `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint  WHERE `fnr` = '".$FNR."'");
+        // Bereite PDO Statement vor
+        $st = $db->prepare("UPDATE `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint  WHERE `fnr` = '".$FNR."'");
 		if ($st->execute(array(':frage' => $Frage, ':fragetyp'=> $Fragetyp, ':aw1' => $AW1, ':aw2' => $AW2, ':aw3' => $AW3, ':aw4' => $AW4, ':aw5' => $AW5, ':aw6' => $AW6,':hint'=>$Hinweis))){
 			echo '<p>Erfolgreich gespeichert</p>'."\n";
 		} else {
@@ -27,8 +29,10 @@ if ($_SESSION['Admin']==1){
 	}
 	if (isset($_POST['fnr'])){
 	$FNR = $_POST['fnr'];;
+	// Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	$st = $db->prepare("SELECT `frage` as 'Frage', `fragetyp` as 'Fragetyp', `aw01` as 'Antwort_1', `aw02` as 'Antwort_2', `aw03` as 'Antwort_3', `aw04` as 'Antwort_4', `aw05` as 'Antwort_5', `aw06` as 'Antwort_6', `hint` as 'Hinweis' FROM `".$pre."quiz_fragen` WHERE `fnr` = '".$FNR."'");
+    // Bereite PDO Statement vor
+        $st = $db->prepare("SELECT `frage` as 'Frage', `fragetyp` as 'Fragetyp', `aw01` as 'Antwort_1', `aw02` as 'Antwort_2', `aw03` as 'Antwort_3', `aw04` as 'Antwort_4', `aw05` as 'Antwort_5', `aw06` as 'Antwort_6', `hint` as 'Hinweis' FROM `".$pre."quiz_fragen` WHERE `fnr` = '".$FNR."'");
 	if ($st->execute()){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
@@ -71,5 +75,7 @@ if ($_SESSION['Admin']==1){
 	}
 	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 	}
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

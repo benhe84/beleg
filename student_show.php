@@ -26,8 +26,10 @@ if ($_SESSION['Admin']==1){
 	echo '<input type="Submit" value="Suchen" name="senden" />'."\n";
 	echo '</form>'."\n";
 	echo '</div>'."\n";
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	$st = $db->prepare("SELECT `sid`, `e-mail` as `E-Mail`, `Vorname`, `Name`, `Klasse`, `lehrer` as `Rolle`  FROM `".$pre."user` WHERE `Name` LIKE :fname && `Vorname` LIKE :vname && `Klasse` LIKE :klasse");
+    // Bereite PDO Statement vor
+    $st = $db->prepare("SELECT `sid`, `e-mail` as `E-Mail`, `Vorname`, `Name`, `Klasse`, `lehrer` as `Rolle`  FROM `".$pre."user` WHERE `Name` LIKE :fname && `Vorname` LIKE :vname && `Klasse` LIKE :klasse");
 	if ($st->execute(array(':fname' => $fname, ':vname'=> $vname, ':klasse'=>$klasse))){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
@@ -55,5 +57,7 @@ if ($_SESSION['Admin']==1){
 	}
 	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

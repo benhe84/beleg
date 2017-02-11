@@ -26,18 +26,21 @@ else {
 	$admin ="0";
 	$login ="0";
 }
-	// Create PDO
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
     // Generiert SQL String für Hauptmenü
 	if ($admin == 1){
+        // Erzeuge SQL-ANWEISUNG für Hauptmenü wenn Lehrer angemeldet
         $sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `logout`=0";
 	}
 	else{
 		if ($login == 1){
-			$sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `admin` = 0 && `logout`=0";
+            // Erzeuge SQL-ANWEISUNG für Hauptmenü wenn Schüler angemeldet
+            $sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `admin` = 0 && `logout`=0";
 		}
 		else{
-			$sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `login`= 0 && `admin` = 0";
+            // Erzeuge SQL-ANWEISUNG für Hauptmenü wenn niemand angemeldet
+            $sql = "SELECT `Kategorie`, `link` FROM `bhe_navi_categories` WHERE `login`= 0 && `admin` = 0";
 		}
 	}
 	if ($result=$db->query($sql)){
@@ -49,14 +52,17 @@ else {
 				echo '<li class="'.$main[0].'"><a href="'.$main[1].'">'.$main[0].'</a>'."\n";
 				// Generiert SQL String für Untermenüs
 				if ($admin==1){
-					$sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 1";			
+                    // Erzeuge SQL-ANWEISUNG für Untermenü wenn Lehrer angemeldet
+                    $sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 1";
 				}
 				else{
 					if ($login == 1){
-						$sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 1 && `bhe_navi_entries`.`admin` = 0";
+                        // Erzeuge SQL-ANWEISUNG für Untermenü wenn Schüler angemeldet
+                        $sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 1 && `bhe_navi_entries`.`admin` = 0";
 					}
 					else{
-						$sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 0 && `bhe_navi_entries`.`admin` = 0";
+                        // Erzeuge SQL-ANWEISUNG für Untermenü wenn niemand angemeldet
+                        $sql1 ="SELECT `Eintrag`, `Adresse` FROM `bhe_navi_entries` INNER JOIN `bhe_navi_categories` ON `KATID` = `ID` WHERE `Kategorie` LIKE '".$main[0]."' && `bhe_navi_entries`.`login`= 0 && `bhe_navi_entries`.`admin` = 0";
 					}
 				}
                 if ($result1=$db->query($sql1)){

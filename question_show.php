@@ -1,11 +1,14 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 if ($_SESSION['Admin']==1){
 	echo '<div class="page_hint">'."\n";
 	include ('question_hint.php');
 	echo '</div>'."\n";
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	$st = $db->prepare("SELECT `fnr` as 'Fragenummer', `frage` as 'Frage', `fragetyp` as 'FT', `aw01` as 'Antwort 1',`hint` as 'Hinweis' FROM `".$pre."quiz_fragen`");
+    // Bereite PDO Statement vor
+    $st = $db->prepare("SELECT `fnr` as 'Fragenummer', `frage` as 'Frage', `fragetyp` as 'FT', `aw01` as 'Antwort 1',`hint` as 'Hinweis' FROM `".$pre."quiz_fragen`");
 	if ($st->execute()){
 		$rows = $st->rowCount();
 		$cols = $st->columnCount();
@@ -46,5 +49,7 @@ if ($_SESSION['Admin']==1){
 	}
 	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

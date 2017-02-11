@@ -1,13 +1,10 @@
 <?php
 // Sorgt dafür das beim neuladen die nächste Frage gezeigt wird
-/**
- *
- */
 function next_question(){
 	global $solved,$db,$qnr,$awresult,$points;
 	// Speichert Ergebnis in Datenbankaufruf
 	if (!$solved) {
-        $sql = ("INSERT INTO `bhe_quiz_gefragt`(`sid`, `fnr`, `try`, `solved`,`points`) VALUES (".$_SESSION['SID'].",".$qnr.",".$_SESSION['Versuch'].",".(int) $awresult.",".$points.")");
+        $sql = ("INSERT INTO `".$pre."quiz_gefragt`(`sid`, `fnr`, `try`, `solved`,`points`) VALUES (".$_SESSION['SID'].",".$qnr.",".$_SESSION['Versuch'].",".(int) $awresult.",".$points.")");
 		$db->query($sql);}
 	// Nächste Frage
 	$_SESSION['quest']++;
@@ -26,34 +23,39 @@ function choice_shuffle(){
 // Wertet die Gesamtpunkzahl aus
 function auswertung(){
     global $db, $pre;
+    // Bereite PDO Statement vor
     $st = $db->prepare("SELECT SUM(`points`) as 'Punkte' FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
     $st->execute();
     $erg = $st->fetch();
     $points = $erg[0];                                                                                                  // Erreichte Punkte
+    // Bereite SQL Anweisung vor
     $st = ("SELECT * FROM ".$pre."quiz_gefragt WHERE `sid`=".$_SESSION['SID']);
     $erg=$db->query($st);
     $reachable = (($erg->rowCount())*5);
     echo '<h2>Du hast '.$points.' von '.$reachable.' Punkten erreicht!</h2>'."\n";
 }
-
+// Bindet den Header der Seite mit der Navigation ein
 include('header.php');
+//Prüft ob Nutzer eingeloggt und Wissensseiten angesehen hat oder Lehrer ist
 if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Admin']==1)){
-    if(isset($_POST['menu'])){$_SESSION['quest']=1;$_SESSION['Versuch']=0;}
-    // Einlesen der Frage
+    // Einlesen der aktuellen Frage
 	if(isset($_SESSION['quest'])){$quest=$_SESSION['quest'];}
+	// Startbelegung der Frage beim ersten Aufruf der Seite
 	else $_SESSION['quest']=1;
 	// Initialisierung der Versuche
 	if(!isset($_SESSION['Versuch'])){$_SESSION['Versuch']=0;}
 	// Antwort auf Falsch setzen
 	$awresult=false;
-	// Zählt auf Versuche
+	// Inkrementiere Versuch nach abgesendetem Formular
 	if ((($_SESSION['Versuch'])==0)&&(isset($_POST['answer0']))) $_SESSION['Versuch']++;
 	if ((($_SESSION['Versuch'])==1)&&(isset($_POST['answer1']))) $_SESSION['Versuch']++;
 	// Variablen belegen
 	$points=0;
 	$try=$_SESSION['Versuch'];
 	$quest=$_SESSION['quest'];
+	// Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
+	// Erzeuge SQL-ANWEISUNG
 	$sqlq = ("SELECT * FROM `".$pre."quiz_fragen` ORDER BY `fnr` LIMIT ".($quest-1).",1");
 	if ($question=$db->query($sqlq)){
 		$erg = $question->fetch();
@@ -185,5 +187,7 @@ if ((($_SESSION['Login']==1)&&((isset($_POST['knowledge'])==1)))||($_SESSION['Ad
 	}
 	else echo 'Datenbankaufruf fehlgeschlagen';
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

@@ -1,5 +1,7 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
+// Prüft ob Lehrer angemeldet
 if ($_SESSION['Admin']==1){
 	if (isset($_POST['senden'])){
 		$pupil = $_POST['pupil'];
@@ -27,8 +29,10 @@ if ($_SESSION['Admin']==1){
 	echo '<input type="Submit" value="W&auml;hlen" name="senden" />'."\n";
 	echo '</form>'."\n";
 	echo '</div>'."\n";
+    // Erzeuge PDO
 	$db = new PDO($dsn, $user, $pwd);
-	if ($pupil=="reset") $st = $db->prepare("SELECT `Vorname`, `Name`, `frage` as 'Frage', `try` as 'Versuche', `solved` as '', `points` as 'Punkte' FROM ".$pre."user INNER JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid ORDER BY `frage`");
+    // Bereite PDO Statement vor
+    if ($pupil=="reset") $st = $db->prepare("SELECT `Vorname`, `Name`, `frage` as 'Frage', `try` as 'Versuche', `solved` as '', `points` as 'Punkte' FROM ".$pre."user INNER JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid ORDER BY `frage`");
 	else $st = $db->prepare("SELECT Vorname, Name, frage as 'Frage', try as 'Versuche', solved as '', `points` as 'Punkte' FROM ".$pre."user INNER JOIN ( ".$pre."quiz_gefragt INNER JOIN ".$pre."quiz_fragen ON ".$pre."quiz_gefragt.fnr = ".$pre."quiz_fragen.fnr ) ON ".$pre."user.sid = ".$pre."quiz_gefragt.sid WHERE ".$pre."user.sid = :pupil ORDER BY `frage`");
     if ($st->execute(array(':pupil'=>$pupil))){
 		$rows = $st->rowCount();
@@ -59,5 +63,7 @@ if ($_SESSION['Admin']==1){
 	}
 	else echo '<p>Datenbankaufruf fehlgeschlagen</p>'."\n";
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

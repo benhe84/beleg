@@ -1,15 +1,16 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 if ($_SESSION['Login']==1)
 {   if(isset($_POST['page']))$page=$_POST['page'];
     else $page=0;
     echo '<div class="knowledge">'."\n";
     // Lädt die Seite aus der Datenbank
-    $st = $db->prepare("SELECT * FROM `".$pre."knowledge` ORDER BY `id` LIMIT ".$page.",1");
-    if ($st->execute()){
-        $row=$st->rowCount();
+    $st = ("SELECT * FROM `".$pre."knowledge` ORDER BY `id` LIMIT ".$page.",1");
+    if ($erg=$db->query($st)){
+        $row=$erg->rowCount();
         if ($row==1){
-            $knowledge = $st->fetch();
+            $knowledge = $erg->fetch();
             echo '<h1>' . $knowledge['title'] . '</h1>'."\n";
             echo $knowledge['content'];
             echo '<div class="sub-nav-container">'."\n";
@@ -25,5 +26,7 @@ if ($_SESSION['Login']==1)
     }
     echo '</div>'."\n";
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');

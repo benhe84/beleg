@@ -1,5 +1,6 @@
 <?php
-include ('header.php');
+// Bindet den Header der Seite mit der Navigation ein
+include('header.php');
 if ($_SESSION['Admin']==1){
     echo '<h1>Frage anlegen</h1>'."\n";
     echo '<div class="page_hint">'."\n";
@@ -15,9 +16,9 @@ if ($_SESSION['Admin']==1){
         $AW5 = $_POST['Antwort_5'];
         $AW6 = $_POST['Antwort_6'];
         $Hinweis = $_POST['Hinweis'];
-        //Create PDO
+        //Erzeuge PDO
         $db = new PDO($dsn, $user, $pwd);
-        //INSERT INTO `bhe_quiz_fragen`(`fnr`, `frage`, `fragetyp`, `aw01`, `aw02`, `aw03`, `aw04`, `aw05`, `aw06`, `hint`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10])
+        // Bereite PDO Statement vor
         $st = $db->prepare("INSERT INTO `".$pre."quiz_fragen` SET `frage` = :frage, `fragetyp` = :fragetyp, `aw01` = :aw1, `aw02`  = :aw2 , `aw03` = :aw3, `aw04` = :aw4, `aw05` = :aw5, `aw06`  = :aw6, `hint` = :hint");
         if ($st->execute(array(':frage' => $Frage, ':fragetyp'=> $Fragetyp, ':aw1' => $AW1, ':aw2' => $AW2, ':aw3' => $AW3, ':aw4' => $AW4, ':aw5' => $AW5, ':aw6' => $AW6,':hint'=>$Hinweis))){
             echo '<p>Erfolgreich angelegt</p>'."\n";
@@ -58,6 +59,8 @@ if ($_SESSION['Admin']==1){
     <?php
         }
 }
-else header('location:index.php');
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
 include ('footer.php');
 ?>

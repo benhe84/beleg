@@ -1,4 +1,5 @@
 <?php
+// Bindet den Header der Seite mit der Navigation ein
 include('header.php');
 if ($_SESSION['Admin'] == 1) {
     if (isset($_POST['save'])) {
@@ -8,8 +9,9 @@ if ($_SESSION['Admin'] == 1) {
         $Vorname = $_POST['Vorname'];
         $Klasse = $_POST['Klasse'];
         $Lehrkraft = $_POST['Lehrkraft'];
-        //Create PDO
+        // Erzeuge PDO
         $db = new PDO($dsn, $user, $pwd);
+        // Bereite PDO Statement vor
         $st = $db->prepare("UPDATE `" . $pre . "user` SET `Vorname`=:vname,`Name`= :name,`e-mail`=:mail,`Klasse`= :klasse,`lehrer`= :lehrer WHERE `sid` = " . $SID);
         if ($st->execute(array(':mail' => $EMail, ':vname' => $Vorname, ':name' => $Name, ':klasse' => $Klasse, ':lehrer' => $Lehrkraft))) {
             echo '<p>Erfolgreich gespeichert</p>' . "\n";
@@ -19,7 +21,9 @@ if ($_SESSION['Admin'] == 1) {
     }
     if (isset($_POST['SID'])) {
         $ESID = $_POST['SID'];
+        // Erzeuge PDO
         $db = new PDO($dsn, $user, $pwd);
+        // Bereite PDO Statement vor
         $st = $db->prepare("SELECT `e-mail` as `E-Mail`, `Vorname`, `Name`, `Klasse`, `lehrer` as `Rolle`  FROM `" . $pre . "user` WHERE `sid` = '" . $ESID . "'");
         if ($st->execute()) {
             $rows = $st->rowCount();
@@ -51,5 +55,8 @@ if ($_SESSION['Admin'] == 1) {
             echo '</form></table>' . "\n";
         } else echo '<p>Abfrage liefert keine Datens&auml;tze</p>' . "\n";
     } else echo '<p>Datenbankaufruf fehlgeschlagen</p>' . "\n";
-} else //header('location:index.php');
-    include('footer.php');
+}
+// Umleitung auf Loginseite, wenn User nicht eingeloggt
+else header('location:login.php');
+// Bindet den Footer der Seite ein
+include ('footer.php');
